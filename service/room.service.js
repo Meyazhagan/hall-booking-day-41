@@ -40,14 +40,14 @@ module.exports = {
     const room = Rooms.get(req.params.id);
     // if no room available for given id
     if (!room)
-      return res.status(404).send({ message: "Given Room ID in invalid." });
+      return res.status(404).send({ message: "Given Room ID is invalid." });
 
     res.send(room);
   },
   create: (req, res) => {
     // validating the body
     const { error, value } = Rooms.verify(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
     // adding room to room list
     const added = Rooms.add(value);
     res.send(added);
@@ -55,12 +55,12 @@ module.exports = {
   update: (req, res) => {
     // validating body
     const { error, value } = Rooms.verify(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
     // updating room
     const id = req.params.id;
     const updated = Rooms.update(id, value);
     if (!updated)
-      return res.status(404).send({ message: "Given Room ID in invalid." });
+      return res.status(404).send({ message: "Given Room ID is invalid." });
     res.send(updated);
   },
   delete: (req, res) => {
@@ -69,7 +69,7 @@ module.exports = {
     const deleted = Rooms.delete(id);
     // if deleted is null, there is no room for given ID
     if (!deleted)
-      return res.status(404).send({ message: "Given Room ID in invalid." });
+      return res.status(404).send({ message: "Given Room ID is invalid." });
     res.send(deleted);
   },
 };

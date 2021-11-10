@@ -43,14 +43,14 @@ module.exports = {
     const customer = Customers.get(req.params.id);
     // if no customer available for given id
     if (!customer)
-      return res.status(404).send({ message: "Given Customer ID in invalid." });
+      return res.status(404).send({ message: "Given Customer ID is invalid." });
 
     res.send(customer);
   },
   create: (req, res) => {
     // validating the body
     const { error, value } = Customers.verify(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
     // adding customer to customer list
     const added = Customers.add(value);
     res.send(added);
@@ -58,12 +58,12 @@ module.exports = {
   update: (req, res) => {
     // validating the body
     const { error, value } = Customers.verify(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
     // updating customer
     const id = req.params.id;
     const updated = Customers.update(id, value);
     if (!updated)
-      return res.status(404).send({ message: "Given Customer ID in invalid." });
+      return res.status(404).send({ message: "Given Customer ID is svalid." });
     res.send(updated);
   },
   delete: (req, res) => {
@@ -71,7 +71,7 @@ module.exports = {
     // deleting customer
     const deleted = Customers.delete(id);
     if (!deleted)
-      return res.status(404).send({ message: "Given Customer ID in invalid." });
+      return res.status(404).send({ message: "Given Customer ID is invalid." });
     res.send(deleted);
   },
 };

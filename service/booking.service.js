@@ -18,7 +18,7 @@ module.exports = {
   get: (req, res) => {
     const booking = Bookings.get(req.params.id);
     if (!booking)
-      return res.status(404).send({ message: "Given Booking ID in invalid." });
+      return res.status(404).send({ message: "Given Booking ID is invalid." });
     // setting room status in booking
     bh.setStatus(booking);
     // pick properities and send response
@@ -89,7 +89,7 @@ module.exports = {
     // updating booking details for booking id
     const updated = Bookings.update(id, _.pick(booking, bh.pickBookingProp));
     if (!updated)
-      return res.status(404).send({ message: "Given Booking ID in invalid." });
+      return res.status(404).send({ message: "Given Booking ID is invalid." });
     res.send(updated);
   },
   delete: (req, res) => {
@@ -97,7 +97,7 @@ module.exports = {
     // deleting booking form list
     const deleted = Bookings.delete(id);
     if (!deleted)
-      return res.status(404).send({ message: "Given Booking ID in invalid." });
+      return res.status(404).send({ message: "Given Booking ID is invalid." });
     res.send(deleted);
   },
 };
