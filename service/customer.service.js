@@ -63,7 +63,7 @@ module.exports = {
     const id = req.params.id;
     const updated = Customers.update(id, value);
     if (!updated)
-      return res.status(404).send({ message: "Given Customer ID is svalid." });
+      return res.status(404).send({ message: "Given Customer ID is invalid." });
     res.send(updated);
   },
   delete: (req, res) => {
