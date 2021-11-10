@@ -1,0 +1,21 @@
+
+Room 
+    - get all rooms
+    - get particular room
+    - get all booked rooms
+    - post room
+    - put room
+    - delete room
+Customer
+    - get all Customers
+    - get particular Customer
+    - get all booked customer
+    - post Customer
+    - put Customer
+    - delete Customer
+Book
+    - get particular Booking
+    - get all Booking
+    - post Booking
+    - put Booking
+    - delete Booking
