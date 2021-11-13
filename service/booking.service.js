@@ -27,7 +27,7 @@ module.exports = {
   create: (req, res) => {
     // validating Body
     const { error, value: booking } = Bookings.verify(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
     // checking customer valid
     const c = Customers.get(booking.customerId);
     if (!c) return res.status(401).send({ message: "Invalid Customer Id" });
@@ -59,7 +59,7 @@ module.exports = {
   update: (req, res) => {
     // validating Body
     const { error, value: booking } = Bookings.validateUpdateBooking(req.body);
-    if (error) res.status(401).send({ message: error.message });
+    if (error) return res.status(401).send({ message: error.message });
 
     const id = req.params.id;
     // attaching roomId and customerId
