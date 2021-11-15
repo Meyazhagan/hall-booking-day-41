@@ -47,7 +47,7 @@ module.exports = {
   create: (req, res) => {
     // validating the body
     const { error, value } = Rooms.verify(req.body);
-    if (error) return res.status(401).send({ message: error.message });
+    if (error) return res.status(400).send({ message: error.message });
     // adding room to room list
     const added = Rooms.add(value);
     res.send(added);
@@ -55,7 +55,7 @@ module.exports = {
   update: (req, res) => {
     // validating body
     const { error, value } = Rooms.verify(req.body);
-    if (error) return res.status(401).send({ message: error.message });
+    if (error) return res.status(400).send({ message: error.message });
     // updating room
     const id = req.params.id;
     const updated = Rooms.update(id, value);

@@ -63,8 +63,8 @@ module.exports = {
 
     const id = req.params.id;
     // attaching roomId and customerId
-    bh.setCustomerAndRoom(id, booking);
-
+    const err = bh.setCustomerAndRoom(id, booking);
+    if (err) return res.status(404).send({ message: err });
     // checking customer valid
     const c = Customers.get(booking.customerId);
     if (!c) return res.status(404).send({ message: "Customer Is NotFound" });
@@ -75,7 +75,7 @@ module.exports = {
     // setting valid interval
     const msg = bh.setInterval(booking);
     // If any invalid Interval
-    if (msg) return res.status(401).send({ message: msg });
+    if (msg) return res.status(400).send({ message: msg });
     // setting status of booking
     bh.setStatus(booking);
     // setting total price
@@ -84,7 +84,7 @@ module.exports = {
     const isOverlap = bh.verifyOverlapping(booking);
     if (isOverlap)
       return res
-        .status(401)
+        .status(400)
         .send({ message: "The selected time slot is already booked" });
     // updating booking details for booking id
     const updated = Bookings.update(id, _.pick(booking, bh.pickBookingProp));

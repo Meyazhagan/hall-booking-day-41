@@ -50,7 +50,7 @@ module.exports = {
   create: (req, res) => {
     // validating the body
     const { error, value } = Customers.verify(req.body);
-    if (error) return res.status(401).send({ message: error.message });
+    if (error) return res.status(400).send({ message: error.message });
     // adding customer to customer list
     const added = Customers.add(value);
     res.send(added);
@@ -58,7 +58,7 @@ module.exports = {
   update: (req, res) => {
     // validating the body
     const { error, value } = Customers.verify(req.body);
-    if (error) return res.status(401).send({ message: error.message });
+    if (error) return res.status(400).send({ message: error.message });
     // updating customer
     const id = req.params.id;
     const updated = Customers.update(id, value);

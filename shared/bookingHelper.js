@@ -75,6 +75,7 @@ const setTotalPrice = (booking) => {
 const setCustomerAndRoom = (id, booking) => {
   // setting customer id and user id
   const book = Bookings.get(id);
+  if (!book) return "Invalid Booking ID";
   booking.roomId = book.roomId;
   booking.customerId = book.customerId;
 };
